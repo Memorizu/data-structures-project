@@ -36,5 +36,6 @@ class Stack:
         if self.top is None:
             return None
 
-        next_node = self.top.pop()
-        return next_node
+        head = self.top
+        self.top = head.next_node
+        return head.data
