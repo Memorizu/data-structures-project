@@ -20,6 +20,12 @@ class TestStack(unittest.TestCase):
         stack.pop()
         self.assertIsNone(stack.top)
 
+    def test_str(self):
+        stack = Stack()
+        self.assertEqual(stack.__str__(), '')
+        stack.push(3)
+        self.assertEqual(stack.__str__(), 3)
+
 
 if __name__ == '__main__':
     unittest.main()
