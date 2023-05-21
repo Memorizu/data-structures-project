@@ -44,3 +44,4 @@ class Stack:
         head = self.top
         self.top = head.next_node
         return head.data
+
