@@ -44,3 +44,19 @@ class LinkedList:
 
         ll_string += ' None'
         return ll_string
+
+    def to_list(self):
+        """Return list of Nodes in linked_list"""
+        lst = []
+        while self.head:
+            lst.append(self.head.data)
+            self.head = self.head.next_node
+        return lst
+
+
+ll = LinkedList()
+ll.insert_beginning({'id': 1})
+ll.insert_at_end({'id': 2})
+ll.insert_at_end({'id': 3})
+ll.insert_beginning({'id': 0})
+print(ll.to_list())
