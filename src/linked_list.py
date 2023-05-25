@@ -6,6 +6,7 @@ class Node:
 
 
 class LinkedList:
+
     """Класс для односвязного списка"""
 
     def __init__(self):
@@ -45,18 +46,26 @@ class LinkedList:
         ll_string += ' None'
         return ll_string
 
-    def to_list(self):
+    def to_list(self) -> list:
         """Return list of Nodes in linked_list"""
         lst = []
-        while self.head:
-            lst.append(self.head.data)
-            self.head = self.head.next_node
+        node = self.head
+        while node:
+            lst.append(node.data)
+            node = node.next_node
         return lst
 
+    def get_data_by_id(self, id: int) -> [dict, str]:
+        try:
+            if not isinstance(id, int):
+                raise TypeError('ID должен быть числом')
 
-ll = LinkedList()
-ll.insert_beginning({'id': 1})
-ll.insert_at_end({'id': 2})
-ll.insert_at_end({'id': 3})
-ll.insert_beginning({'id': 0})
-print(ll.to_list())
+            for node in self.to_list():
+                if not isinstance(node, dict):
+                    raise TypeError('Данные не являются словарем')
+                if node.get('id') == id:
+                    return node
+        except TypeError as e:
+            return e
+
+
