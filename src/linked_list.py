@@ -1,3 +1,6 @@
+from typing import Dict
+
+
 class Node:
     """Класс для узла односвязного списка"""
     def __init__(self, data, next_node=None):
@@ -21,16 +24,20 @@ class LinkedList:
             new_node.next_node = self.head
             self.head = new_node
 
-    def insert_at_end(self, data: dict) -> None:
+    def insert_at_end(self, data: dict) -> [None, str]:
         """Принимает данные (словарь) и добавляет узел с этими данными в конец связанного списка"""
-        new_node = Node(data)
-        if self.head is None:
-            self.head = new_node
-        else:
-            current_node = self.head
-            while current_node.next_node is not None:
-                current_node = current_node.next_node
-            current_node.next_node = new_node
+        try:
+            if self.check_type(data):
+                new_node = Node(data)
+                if self.head is None:
+                    self.head = new_node
+                else:
+                    current_node = self.head
+                    while current_node.next_node is not None:
+                        current_node = current_node.next_node
+                    current_node.next_node = new_node
+        except TypeError:
+            print("Данные не являются словарем")
 
     def __str__(self) -> str:
         """Вывод данных односвязного списка в строковом представлении"""
@@ -55,17 +62,14 @@ class LinkedList:
             node = node.next_node
         return lst
 
-    def get_data_by_id(self, id: int) -> [dict, str]:
-        try:
-            if not isinstance(id, int):
-                raise TypeError('ID должен быть числом')
+    def check_type(self, data):
+        if not isinstance(data, dict):
+            raise TypeError
+        return True
 
-            for node in self.to_list():
-                if not isinstance(node, dict):
-                    raise TypeError('Данные не являются словарем')
-                if node.get('id') == id:
-                    return node
-        except TypeError as e:
-            return e
+    def get_data_by_id(self, id: int) -> [dict, str]:
+        for node in self.to_list():
+            if node.get('id') == id:
+                return node
 
 
